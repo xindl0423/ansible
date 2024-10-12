@@ -1,0 +1,26 @@
+---
+- name: Lab4 config
+  hosts: cisco
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Check uptime
+      routerios_command:
+        commands:
+          - interface loopback 1
+          -  description Interface simulates network lin00193-A
+          - ip address 10.10.1.1 255.255.255.0
+          - ip opsf 50 area 0
+          - ip ospf network point-to-point
+          - exit
+          - interface Loopback 2
+          - description Interface simulates network lin00193-B
+          - ip address 10.10.2.1 255.255.255.0
+          - ip opsf 50 area 0
+          - ip ospf network point-to-point
+          - exit
+          - router ospf 50
+          - router-id 50.0.0.4
+          - auto-cost reference-bandwidth 1000
+          - end
+    - name: Print result
